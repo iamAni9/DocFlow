@@ -1,4 +1,6 @@
-# DocFlow: Full Stack Document Editor
+<div align="center">
+  <img src="frontend/public/logo.svg" width="240" alt="DocFlow Logo" />
+</div>
 
 DocFlow is a full-stack document editing application built with a modern technology stack, featuring real-time autosave, rich-text editing, and a premium UI.
 
