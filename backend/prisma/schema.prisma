@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id         String           @id @default(uuid())
+  username   String           @unique
+  ownedDocs  Document[]       @relation("OwnedDocuments")
+  sharedDocs SharedDocument[]
+}
+
+model Document {
+  id         String           @id @default(uuid())
+  title      String
+  content    String
+  ownerId    String
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+  owner      User             @relation("OwnedDocuments", fields: [ownerId], references: [id])
+  sharedWith SharedDocument[]
+}
+
+model SharedDocument {
+  id         String   @id @default(uuid())
+  documentId String
+  userId     String
+  document   Document @relation(fields: [documentId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@unique([documentId, userId])
+}
