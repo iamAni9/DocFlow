@@ -30,6 +30,7 @@ const Editor = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isOwner, setIsOwner] = useState(true); 
   const [users, setUsers] = useState<any[]>([]);
+  const [, setEditorState] = useState(0);
 
   useEffect(() => {
     if (showShareModal) {
@@ -43,6 +44,9 @@ const Editor = () => {
   const editor = useEditor({
     extensions: [StarterKit, Underline],
     content: '',
+    onTransaction: () => {
+      setEditorState(prev => prev + 1);
+    },
     onUpdate: ({ editor }) => {
       if (!id || !autoSaveEnabledRef.current) return;
       if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
