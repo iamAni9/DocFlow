@@ -13,7 +13,7 @@ const Editor = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const titleRef = useRef(title);
-  const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { showToast } = useToast();
   const { confirm } = useConfirm();
 
